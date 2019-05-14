@@ -10,6 +10,8 @@ class Edificio extends Model
 
     protected $fillable= [
         'nombre',
-        'id_campus'
+        'id_campus',
+        'foto',
+        'referencia'
     ];
 }
