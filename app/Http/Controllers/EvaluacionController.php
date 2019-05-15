@@ -65,7 +65,21 @@ class EvaluacionController extends Controller
                 $promedio = $suma/$numero;
             array_push($promedios,['profesor'=>$profesor->nombre.' '.$profesor->ape_paterno,'promedio'=>$promedio,'id_profesor'=>$profesor->id]);
         }
+        return $this->success($promedios);
+    }
 
+    public function promedioProfesor(Request $request){
+        $profesor = Profesor::find($request->id);
+        $suma = Evaluacion::selectRaw('sum(calificacion) as suma')
+        ->where('id_profesor',$profesor->id)
+        ->get();
+        $numero = Evaluacion::where('id_profesor',$profesor->id)
+        ->count();
+        $promedio = 0;
+        if($numero>0)
+            $promedio = $suma/$numero;
+        $promedios=['profesor'=>$profesor->nombre.' '.$profesor->ape_paterno,'promedio'=>$promedio,'id_profesor'=>$profesor->id];
+    
         return $this->success($promedios);
     }
 

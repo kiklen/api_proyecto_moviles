@@ -55,12 +55,13 @@ class ComentarioController extends Controller
         $comentarios = array();
         foreach($profesores as $profesor) {
             $comentario = Comentario::where('id_profesor',$profesor->id)->get();
-            array_push($promedios,['profesor'=>$profesor->nombre.' '.$profesor->ape_paterno,'comentario'=>$comentario,'id_profesor'=>$profesor->id]);
+            array_push($comentarios,['profesor'=>$profesor->nombre.' '.$profesor->ape_paterno,'comentario'=>$comentario,'id_profesor'=>$profesor->id]);
         }
         return $this->success($comentarios);
     }
 
     public function obtenerComentariosPorProfesor(Request $request){
+        $profesor= Profesor::find($request->id);
         $comentario = Comentario::where('id_profesor',$request->id)->get();
         $comentarios = ['profesor'=>$profesor->nombre.' '.$profesor->ape_paterno,'comentario'=>$comentario,'id_profesor'=>$profesor->id];
         return $this->success($comentarios);
