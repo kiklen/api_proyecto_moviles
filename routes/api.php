@@ -18,17 +18,13 @@ Route::group([
 ], function () {
     Route::post('login', 'UserController@login');
     Route::post('signup', 'UserController@signup');
-  
-    Route::group([
-      'middleware' => 'auth:api'
-    ], function() {
-        Route::get('logout', 'UserController@logout');
-        Route::get('user', 'UserController@user');
-    });
+    Route::get('logout', 'UserController@logout');
+    Route::get('user', 'UserController@user');
+
 });
 
 Route::group([
-    'middleware' => 'auth:api','prefix' =>'area'
+    'prefix' =>'area'
   ], function() {
       Route::post('insertar', 'AreaController@insertar');
       Route::post('actualizar', 'AreaController@actualizar');
@@ -38,7 +34,7 @@ Route::group([
   });
 
   Route::group([
-    'middleware' => 'auth:api','prefix' =>'aula'
+    'prefix' =>'aula'
   ], function() {
       Route::post('insertar', 'AulaController@insertar');
       Route::post('actualizar', 'AulaController@actualizar');
@@ -48,7 +44,7 @@ Route::group([
   });
 
   Route::group([
-    'middleware' => 'auth:api','prefix' =>'campus'
+    'prefix' =>'campus'
   ], function() {
       Route::post('insertar', 'CampusController@insertar');
       Route::post('actualizar', 'CampusController@actualizar');
@@ -58,7 +54,7 @@ Route::group([
   });
 
   Route::group([
-    'middleware' => 'auth:api','prefix' =>'comentario'
+    'prefix' =>'comentario'
   ], function() {
       Route::post('insertar', 'ComentarioController@insertar');
       Route::post('actualizar', 'ComentarioController@actualizar');
@@ -69,7 +65,7 @@ Route::group([
   });
 
   Route::group([
-    'middleware' => 'auth:api','prefix' =>'edificio'
+    'prefix' =>'edificio'
   ], function() {
       Route::post('insertar', 'EdificioController@insertar');
       Route::post('actualizar', 'EdificioController@actualizar');
@@ -79,7 +75,7 @@ Route::group([
   });
 
   Route::group([
-    'middleware' => 'auth:api','prefix' =>'evaluacion'
+    'prefix' =>'evaluacion'
   ], function() {
       Route::post('insertar', 'EvaluacionController@insertar');
       Route::post('actualizar', 'EvaluacionController@actualizar');
@@ -91,13 +87,53 @@ Route::group([
   });
 
   Route::group([
-    'middleware' => 'auth:api','prefix' =>'profesor'
+    'prefix' =>'profesor'
   ], function() {
       Route::post('insertar', 'ProfesorController@insertar');
       Route::post('actualizar', 'ProfesorController@actualizar');
       Route::delete('eliminar', 'ProfesorController@eliminar');
       Route::get('mostrar', 'ProfesorController@mostrar');
       Route::get('listar', 'ProfesorController@listar');
+  });
+
+  Route::group([
+    'prefix' =>'curso'
+  ], function() {
+      Route::post('insertar', 'CursoController@insertar');
+      Route::post('actualizar', 'CursoController@actualizar');
+      Route::delete('eliminar', 'CursoController@eliminar');
+      Route::get('mostrar', 'CursoController@mostrar');
+      Route::get('listar', 'CursoController@listar');
+  });
+
+  Route::group([
+    'prefix' =>'materia'
+  ], function() {
+      Route::post('insertar', 'MateriaController@insertar');
+      Route::post('actualizar', 'MateriaController@actualizar');
+      Route::delete('eliminar', 'MateriaController@eliminar');
+      Route::get('mostrar', 'MateriaController@mostrar');
+      Route::get('listar', 'MateriaController@listar');
+  });
+
+  Route::group([
+    'prefix' =>'pregunta'
+  ], function() {
+      Route::post('insertar', 'PreguntaController@insertar');
+      Route::post('actualizar', 'PreguntaController@actualizar');
+      Route::delete('eliminar', 'PreguntaController@eliminar');
+      Route::get('mostrar', 'PreguntaController@mostrar');
+      Route::get('listar', 'PreguntaController@listar');
+  });
+
+  Route::group([
+    'prefix' =>'respuesta'
+  ], function() {
+      Route::post('insertar', 'RespuestaController@insertar');
+      Route::post('actualizar', 'RespuestaController@actualizar');
+      Route::delete('eliminar', 'RespuestaController@eliminar');
+      Route::get('mostrar', 'RespuestaController@mostrar');
+      Route::get('listar', 'RespuestaController@listar');
   });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

@@ -11,7 +11,9 @@ class EvaluacionController extends Controller
         $rules = [
             'calificacion' => 'required',
             'fecha' => 'required',
-            'id_profesor' => 'required|exists:profesor,id'
+            'id_profesor' => 'required|exists:profesor,id',
+            'id_user' => 'required|exists:user,id',
+            'id_curso' => 'required|exists:curso,id'
         ];
         $datos = $request->all();
         $errores = $this->validate($datos,$rules);
@@ -79,7 +81,7 @@ class EvaluacionController extends Controller
         if($numero>0)
             $promedio = $suma/$numero;
         $promedios=['profesor'=>$profesor->nombre.' '.$profesor->ape_paterno,'promedio'=>$promedio,'id_profesor'=>$profesor->id];
-    
+
         return $this->success($promedios);
     }
 

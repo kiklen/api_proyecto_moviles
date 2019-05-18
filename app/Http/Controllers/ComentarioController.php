@@ -10,7 +10,9 @@ class ComentarioController extends Controller
         $rules = [
             'texto' => 'required',
             'fecha' => 'required',
-            'id_profesor' => 'required|exists:profesor,id'
+            'id_profesor' => 'required|exists:profesor,id',
+            'id_user' => 'required|exists:user,id',
+            'id_curso' => 'required|exists:curso,id'
         ];
         $datos = $request->all();
         $errores = $this->validate($datos,$rules);

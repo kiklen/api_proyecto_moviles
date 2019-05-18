@@ -13,11 +13,14 @@ class Evaluacion extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('evaluacion');
         Schema::create('evaluacion', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('calificacion');
+            $table->unsignedBigInteger('id_user');
             $table->timestamp('fecha');
             $table->timestamps();
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 
