@@ -19,6 +19,7 @@ class Foraneas extends Migration
         });
 
         Schema::table('comentario', function (Blueprint $table) {
+            $table->unsignedInteger('id_curso');
             $table->foreign('id_curso')->references('id')->on('curso');
         });
     }

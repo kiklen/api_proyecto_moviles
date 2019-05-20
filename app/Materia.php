@@ -8,6 +8,6 @@ class Materia extends Model
 {
     protected $table= 'materia';
     protected $fillable = [
-        'nombre'
+        'nombre','semestre'
     ];
 }
