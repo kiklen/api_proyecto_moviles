@@ -14,7 +14,7 @@ class CambioLlaves1 extends Migration
     public function up()
     {
         Schema::table('respuesta', function (Blueprint $table) {
-            $table->dropForeign('respuesta_id_evaluacion_foreign');            
+            $table->dropForeign('respuesta_id_evaluacion_foreign');
             $table->dropColumn('id_evaluacion');
         });
 

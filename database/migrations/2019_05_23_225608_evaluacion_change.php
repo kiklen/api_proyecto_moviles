@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CambioLlaves extends Migration
+class EvaluacionChange extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CambioLlaves extends Migration
      */
     public function up()
     {
-        Schema::table('respuesta', function (Blueprint $table) {
-            //$table->dropColumn('id_evaluacion');
-        });
-
-        Schema::table('pregunta', function (Blueprint $table) {
-            $table->unsignedInteger('id_evaluacion');
-            $table->foreign('id_evaluacion')->references('id')->on('evaluacion');
+        Schema::table('evaluacion', function (Blueprint $table) {
+            $table->integer('calificacion')->nullable()->change();
         });
     }
 

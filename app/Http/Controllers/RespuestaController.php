@@ -8,9 +8,9 @@ class RespuestaController extends Controller
 {
     public function insertar(Request $request){
         $rules = [
-            'puntuacion' => 'required',
             'id_pregunta' => 'required|exists:pregunta,id',
-            'id_evaluacion' => 'required|exists:evaluacion,id'
+            'respuesta' => 'required',
+            'valor'=>'required'
         ];
         $datos = $request->all();
         $errores = $this->validate($datos,$rules);

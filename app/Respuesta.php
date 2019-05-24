@@ -9,7 +9,7 @@ class Respuesta extends Model
     protected $table= 'respuesta';
     protected $fillable = [
         'id_pregunta',
-        'id_evaluacion',
-        'puntuacion'
+        'respuesta',
+        'valor'
     ];
 }
