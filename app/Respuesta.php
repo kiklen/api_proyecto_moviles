@@ -12,4 +12,8 @@ class Respuesta extends Model
         'respuesta',
         'valor'
     ];
+
+    public function pregunta(){
+        return $this->belongsTo('App\Pregunta','id_pregunta');
+    }
 }

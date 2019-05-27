@@ -38,7 +38,7 @@ class PreguntaController extends Controller
         return $this->succes(["objeto eliminado correctamente"]);
     }
     public function listar(){
-        $data = Pregunta::get();
+        $data = Pregunta::with('respuesta')->get();
         return $this->success($data);
     }
     public function mostrar($id){

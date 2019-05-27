@@ -38,8 +38,9 @@ class ProfesorController extends Controller
         $data->delete();
         return $this->succes(["objeto eliminado correctamente"]);
     }
-    public function listar(){
-        $data = Profesor::get();
+    public function listar(Request $request){
+        $data = Profesor::join('curso','id_profesor','=','profesor.id')
+        ->where('id_materia',$request->id_materia)->get();
         return $this->success($data);
     }
     public function mostrar($id){

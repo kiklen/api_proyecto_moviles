@@ -40,7 +40,7 @@ class EvaluacionController extends Controller
     }
 
     public function obtenerPromedio(Request $request){
-        $evaluaciones = Evaluacion::join('curso','=','id_evaluacion')
+        $evaluaciones = Evaluacion::join('curso','id_evaluacion','=','evaluacion.id')
         ->where('id_profesor',$request->id_profesor);
         $suma=$evaluaciones->sum('calificacion');
         $promedio = $suma/$evaluaciones->count();
