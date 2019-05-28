@@ -19,8 +19,7 @@ class CambioLlaves1 extends Migration
         });
 
         Schema::table('pregunta', function (Blueprint $table) {
-            $table->unsignedInteger('id_evaluacion')->nullable();
-            $table->foreign('id_evaluacion')->references('id')->on('evaluacion');
+            $table->unsignedInteger('id_evaluacion')->nullable()->change();
         });
     }
 

@@ -58,7 +58,41 @@ class EvaluacionController extends Controller
         $profesor->respuesta4= $cuantos4;
         $profesor->cuantos= $cuantos;
 
-        return $this->success($profesor);
+        $cont =1;
+        $preguntas=array();
+        while($cont < 9){
+            $evaluacion = $this->porPregunta($cont,$request->id_profesor);
+            $total_respuestas = $evaluacion->count();
+            $total_uno= $evaluacion->where('calificacion',1)->count();
+            $total_dos= $evaluacion->where('calificacion',2)->count();
+            $total_tres= $evaluacion->where('calificacion',3)->count();
+            $total_cuatro= $evaluacion->where('calificacion',4)->count();
+            $id_pregunta=$cont;
+
+            array_push($preguntas,[
+                'pregunta'=>$cont,
+                'total'=>$total_respuestas,
+                'respondio_1'=>$total_uno,
+                'respondio_2'=>$total_dos,
+                'respondio_3'=>$total_tres,
+                'respondio_4'=>$total_cuatro,
+            ]);
+            $cont++;
+        }
+
+        $result = ['profesor'=>$profesor,'preguntas'=>$preguntas];
+              
+        return $this->success($result);
+    }
+
+    //funcion auxiliar
+    public function porPregunta($pregunta,$id_profesor){
+        $evaluaciones= Evaluacion::join('curso','curso.id_evaluacion','=','evaluacion.id')
+        ->join('set','set.id_evaluacion','=','evaluacion.id')
+        ->where('id_profesor',$id_profesor)
+        ->where('id_pregunta',$pregunta);
+
+        return $evaluaciones;
     }
 
     public function obtenerPromedioTodos(Request $request){
