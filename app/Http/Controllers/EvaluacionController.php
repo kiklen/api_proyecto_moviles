@@ -29,8 +29,9 @@ class EvaluacionController extends Controller
             $respuesta = [
                 'id_evaluacion'=>$evaluacion->id,
                 'id_pregunta'=>$set->id_pregunta,
-                'calificacion'=>$set->calificacion
+                'puntuacion'=>$set->calificacion
             ];
+            App\Set::create($respuesta);
             $calificacion+= $set->calificacion;
         }
         $calificacion = $calificacion/count($request->set);
@@ -67,7 +68,6 @@ class EvaluacionController extends Controller
             $total_dos= $evaluacion->where('calificacion',2)->count();
             $total_tres= $evaluacion->where('calificacion',3)->count();
             $total_cuatro= $evaluacion->where('calificacion',4)->count();
-            $id_pregunta=$cont;
 
             array_push($preguntas,[
                 'pregunta'=>$cont,
