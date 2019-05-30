@@ -64,10 +64,10 @@ class EvaluacionController extends Controller
         while($cont < 9){
             $evaluacion = $this->porPregunta($cont,$request->id_profesor);
             $total_respuestas = $evaluacion->count();
-            $total_uno= $evaluacion->where('calificacion',1)->count();
-            $total_dos= $evaluacion->where('calificacion',2)->count();
-            $total_tres= $evaluacion->where('calificacion',3)->count();
-            $total_cuatro= $evaluacion->where('calificacion',4)->count();
+            $total_uno= $evaluacion->where('set.puntuacion',1)->count();
+            $total_dos= $evaluacion->where('set.puntuacion',2)->count();
+            $total_tres= $evaluacion->where('set.puntuacion',3)->count();
+            $total_cuatro= $evaluacion->where('set.puntuacion',4)->count();
 
             array_push($preguntas,[
                 'pregunta'=>$cont,
