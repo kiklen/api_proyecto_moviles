@@ -9,15 +9,24 @@ class ProfesorController extends Controller
     public function insertar(Request $request){
         $rules = [
             'nombre' => 'required',
-            'ap_paterno' => 'required',
-            'id_area' => 'required|exists:area,id'
+            'ap_paterno' => 'required'
         ];
+
+        
         $datos = $request->all();
         $errores = $this->validate($datos,$rules);
         if(count($errores)>0){
             return $this->error($errores);
         }
         $profesor = Profesor::create($datos);
+        if(isset($request->foto)){
+            $image = $request->file('foto');
+            $nombre['imagename']= $profesor->id.'.'.$image->getClientOriginalExtension();
+            $path = public_path('/storage/app/public/');
+            $image->move($path,$nombre['imagename']);
+            $profesor->foto = '/storage/app/public/'.$nombre['imagename'];
+            $profesor->save();
+        }
         return $this->success($profesor);
     }
     public function actualizar(Request $request){
