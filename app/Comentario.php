@@ -11,6 +11,7 @@ class Comentario extends Model
     protected $fillable= [
         'texto',
         'fecha',
-        'id_profesor'
+        'id_curso',
+        'id_user'
     ];
 }
