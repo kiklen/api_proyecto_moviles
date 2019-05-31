@@ -140,6 +140,14 @@ class EvaluacionController extends Controller
         return $this->success($data);
     }
 
+    public function porUsuario(Request $request){
+        $data = Evaluacion::where('id_usuario',$request->id);
+        if(!$data) {
+            return $this->response(["Objeto no encontrado"]);
+        }
+        return $this->success($data);
+    }
+
     public function promedioProfesores(Request $request){
         $profesores = Profesor::get();
         $promedios = array();
