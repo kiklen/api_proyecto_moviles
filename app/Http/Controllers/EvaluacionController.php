@@ -81,7 +81,7 @@ class EvaluacionController extends Controller
         }
 
         $result = ['profesor'=>$profesor,'preguntas'=>$preguntas];
-              
+
         return $this->success($result);
     }
 
@@ -135,7 +135,7 @@ class EvaluacionController extends Controller
     public function mostrar($id){
         $data = Evaluacion::find($id);
         if(!$data) {
-            return $this->error(["Objeto no encontrado"]);
+            return $this->response(["Objeto no encontrado"]);
         }
         return $this->success($data);
     }
