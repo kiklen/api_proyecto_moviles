@@ -10,8 +10,7 @@ class ComentarioController extends Controller
         $rules = [
             'texto' => 'required',
             'fecha' => 'required',
-            'id_profesor' => 'required|exists:profesor,id',
-            'id_user' => 'required|exists:user,id',
+            'id_user' => 'required|exists:users,id',
             'id_curso' => 'required|exists:curso,id'
         ];
         $datos = $request->all();
@@ -52,14 +51,14 @@ class ComentarioController extends Controller
         return $this->success($data);
     }
 
-    public function obtenerComentarios(Request $request){
+    public function obtenerComentariosPorProfesor(Request $request){
         $comentarios = Comentario::where('id_curso',$request->id_curso)->get();
         return $this->success($comentarios);
     }
 
 
     //no se usa
-    public function obtenerComentariosPorProfesor(Request $request){
+    public function obtenerComentarios(Request $request){
         $profesor= Profesor::find($request->id);
         $comentario = Comentario::where('id_profesor',$request->id)->get();
         $comentarios = ['profesor'=>$profesor->nombre.' '.$profesor->ape_paterno,'comentario'=>$comentario,'id_profesor'=>$profesor->id];

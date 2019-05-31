@@ -29,8 +29,9 @@ class EvaluacionController extends Controller
             $respuesta = [
                 'id_evaluacion'=>$evaluacion->id,
                 'id_pregunta'=>$set->id_pregunta,
-                'calificacion'=>$set->calificacion
+                'puntuacion'=>$set->calificacion
             ];
+            App\Set::create($respuesta);
             $calificacion+= $set->calificacion;
         }
         $calificacion = $calificacion/count($request->set);
@@ -46,16 +47,16 @@ class EvaluacionController extends Controller
         $promedio = $suma/$evaluaciones->count();
 
         $cuantos = $evaluaciones->count();
-        $cuantos1 = $evaluaciones->where('calificacion',1)->count();
+        /*$cuantos1 = $evaluaciones->where('calificacion',1)->count();
         $cuantos2 = $evaluaciones->where('calificacion',2)->count();
         $cuantos3 = $evaluaciones->where('calificacion',3)->count();
-        $cuantos4 = $evaluaciones->where('calificacion',4)->count();
+        $cuantos4 = $evaluaciones->where('calificacion',4)->count();*/
         $profesor = Profesor::find($request->id_profesor);
         $profesor->promedio = $promedio;
-        $profesor->respuesta1= $cuantos1;
+        /*$profesor->respuesta1= $cuantos1;
         $profesor->respuesta2= $cuantos2;
         $profesor->respuesta3= $cuantos3;
-        $profesor->respuesta4= $cuantos4;
+        $profesor->respuesta4= $cuantos4;*/
         $profesor->cuantos= $cuantos;
 
         $cont =1;
@@ -63,11 +64,10 @@ class EvaluacionController extends Controller
         while($cont < 9){
             $evaluacion = $this->porPregunta($cont,$request->id_profesor);
             $total_respuestas = $evaluacion->count();
-            $total_uno= $evaluacion->where('calificacion',1)->count();
-            $total_dos= $evaluacion->where('calificacion',2)->count();
-            $total_tres= $evaluacion->where('calificacion',3)->count();
-            $total_cuatro= $evaluacion->where('calificacion',4)->count();
-            $id_pregunta=$cont;
+            $total_uno= $evaluacion->where('set.puntuacion',1)->count();
+            $total_dos= $evaluacion->where('set.puntuacion',2)->count();
+            $total_tres= $evaluacion->where('set.puntuacion',3)->count();
+            $total_cuatro= $evaluacion->where('set.puntuacion',4)->count();
 
             array_push($preguntas,[
                 'pregunta'=>$cont,

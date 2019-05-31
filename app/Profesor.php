@@ -12,6 +12,6 @@ class Profesor extends Model
         'nombre',
         'ap_paterno',
         'ap_materno',
-        'id_area'
+        'foto'
     ];
 }
