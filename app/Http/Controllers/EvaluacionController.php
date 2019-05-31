@@ -141,10 +141,12 @@ class EvaluacionController extends Controller
     }
 
     public function porUsuario(Request $request){
-        $data = Evaluacion::where('id_usuario',$request->id);
+        $data = Evaluacion::where('id_usuario',$request->id)->first();
         if(!$data) {
             return $this->response(["Objeto no encontrado"]);
         }
+        $comentario = Comentario::where('id_usuario',$request->id_usuario)->first();
+        $data->evaluaciones = $data->set;
         return $this->success($data);
     }
 

@@ -13,4 +13,8 @@ class Evaluacion extends Model
         'fecha',
         'id_profesor'
     ];
+
+    public function set(){
+        return $this->hasMany('App\Set','id_evaluacion');
+    }
 }
