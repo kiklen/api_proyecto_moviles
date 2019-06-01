@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Evaluacion;
 use App\Profesor;
+use App\Comentario;
 class EvaluacionController extends Controller
 {
     public function insertar(Request $request){
