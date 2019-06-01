@@ -37,7 +37,7 @@ class MateriaController extends Controller
         return $this->succes(["objeto eliminado correctamente"]);
     }
     public function listar(Request $request){
-        $data = Materia::where('semestre'->$request->semestre)->get();
+        $data = Materia::where('semestre',$request->semestre)->get();
         return $this->success($data);
     }
     public function mostrar($id){
