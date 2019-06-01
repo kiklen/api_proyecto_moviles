@@ -135,18 +135,21 @@ class EvaluacionController extends Controller
     public function mostrar($id){
         $data = Evaluacion::find($id);
         if(!$data) {
-            return $this->response(["Objeto no encontrado"]);
+            return $this->response(["Objeto no encontrado"],200);
         }
         return $this->success($data);
     }
 
     public function porUsuario(Request $request){
-        $data = Evaluacion::where('id_usuario',$request->id)->first();
+        $data = Evaluacion::where('id_usuario',$request->id_usuario)
+        ->where('id_curso',$request->id_curso)
+        ->first();
         if(!$data) {
-            return $this->response(["Objeto no encontrado"]);
+            return $this->response(["Objeto no encontrado"],200);
         }
         $comentario = Comentario::where('id_usuario',$request->id_usuario)->first();
         $data->evaluaciones = $data->set;
+        $data->comentario = $comentario;
         return $this->success($data);
     }
 
